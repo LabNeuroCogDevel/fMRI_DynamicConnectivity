@@ -31,9 +31,13 @@ function [ p ] = weight_subj(roifile,N)
     toc
 
     %% scott likes his matrix square
-    p_trunc=p(:,:,N:end);
-
-    p=p+p';
+    %pback=p;
+    % first N time points are NaN
+    p=p(:,:,N:end);
+    % square it
+    for i =1:size(p,3)
+        p(:,:,i) = p(:,:,i)+p(:,:,i)';
+    end
 
 end
 
