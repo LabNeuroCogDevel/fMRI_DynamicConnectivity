@@ -13,7 +13,7 @@ tic, p=weight_subj(roi,N);toc,
 %
 ptstat = ptstat_subj(p);
 
-%% FOR ALL SUBJ
+%% FOR ALL SUBJ -- last FM
 % fixe me; vecotize
 
 roifiles = ROIfile_fromdir(roistatdir);
@@ -21,3 +21,8 @@ roifiles = ROIfile_fromdir(roistatdir);
 
 plot(histcounts(subjptstat(~isnan(subjptstat))))
 %save('nsp_tstats.mat','subjptstat','roifiles','psubj','-v7.3')
+
+
+%% FOR ALL SUBJS -- early FM
+roifiles = ROIfile_fromdir('/Volumes/Zeus/preproc/MM_rest_earlyFM/MHRest_MB_ln/Roistatfiles/');
+[ subjptstat_eFM,psubj_eFM ] = tstat_roistatdir( roifiles,nROI );
