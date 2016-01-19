@@ -1,5 +1,7 @@
 % sliding window size
 N=50;
+nROI=333; % should get this from file, but easier to define here
+roistatdir='/Volumes/Zeus/preproc/MM_rest/MHRest_MB_ln/Roistatfiles/';
 
 %% FOR ONE SUBJECT
 % read in rois
@@ -13,21 +15,9 @@ ptstat = ptstat_subj(p);
 
 %% FOR ALL SUBJ
 % fixe me; vecotize
-roifiles={};
-roistatdir='/Volumes/Zeus/preproc/MM_rest/MHRest_MB_ln/Roistatfiles/';
-for f=dir(roistatdir)'
-  if ~f.isdir; roifiles={roifiles{:} [ roistatdir f.name]};end
-end
 
-%NB: know 333 rois, not derived from data. fixme?
-subjptstat = zeros(333,333,length(roifiles));
-
-parfor i=1:length(roifiles)
-    N=50;
-    tic
-    psubj{i} = weight_subj(roifiles{i},N);
-    subjptstat(:,:,i) = ptstat_subj(psubj{i} );
-    toc
-end
+roifiles = ROIfile_fromdir(roistatdir);
+[ subjptstat,psubj ] = tstat_roistatdir( roifiles,nROI );
 
 plot(histcounts(subjptstat(~isnan(subjptstat))))
+%save('nsp_tstats.mat','subjptstat','roifiles','psubj','-v7.3')

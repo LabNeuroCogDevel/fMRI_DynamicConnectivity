@@ -1,4 +1,4 @@
-function [ ptstat ] = ptstat_subj( p )
+  function [ ptstat ] = ptstat_subj( p )
 %PWCM Pearson Weighted Correlation Matrix
 %   a la Zalesky (Time resolved resting state brain networks)
 
