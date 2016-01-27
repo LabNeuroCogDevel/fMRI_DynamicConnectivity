@@ -46,7 +46,9 @@ subplot(3,1,2); hold on; plot(r.j.s,'b--');
 subplot(3,1,3); hold on; plot(r.k.s,'b--');
 
 %% plot cor
+tstatval = nonstationaryTstat(r.c.ij(51:150));
 efig.c=figure('units','normalized','position',dim_1xlong);
-plot(r.c.ij)
+plot(r.c.ij);xlim([1 150]); %ylim([-2 2]);
+title(['ij nonstationary Tstat = ', num2str(tstatval)])
 
 
